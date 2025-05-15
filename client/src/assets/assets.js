@@ -1,4 +1,4 @@
-import zapcart_logo from './zapcart_logo.png';
+import zapcart_logo from './zapcart_logo-rbg.png';
 import logo from "./logo.svg";
 import search_icon from "./search_icon.svg";
 import remove_icon from "./remove_icon.svg";
