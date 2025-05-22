@@ -70,7 +70,7 @@ const Cart = () => {
                                 </div>
                             </div>
                         </div>
-                        <p className="text-center">{currency}${product.offerPrice * product.quantity}</p>
+                        <p className="text-center">{currency}{product.offerPrice * product.quantity}</p>
                         <button onClick={()=>removeFromCart(product._id)} className="cursor-pointer mx-auto">
                             {/* <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="m12.5 7.5-5 5m0-5 5 5m5.833-2.5a8.333 8.333 0 1 1-16.667 0 8.333 8.333 0 0 1 16.667 0" stroke="#FF532E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -130,16 +130,16 @@ const Cart = () => {
 
                 <div className="text-gray-500 mt-4 space-y-2">
                     <p className="flex justify-between">
-                        <span>Price</span><span>{currency}${getCartAmount()}</span>
+                        <span>Price</span><span>{currency}{getCartAmount()}</span>
                     </p>
                     <p className="flex justify-between">
                         <span>Shipping Fee</span><span className="text-green-600">Free</span>
                     </p>
                     <p className="flex justify-between">
-                        <span>Tax (2%)</span><span>{currency}${getCartAmount() * 2 / 100}</span>
+                        <span>Tax (2%)</span><span>{currency}{getCartAmount() * 2 / 100}</span>
                     </p>
                     <p className="flex justify-between text-lg font-medium mt-3">
-                        <span>Total Amount:</span><span>{currency}${ getCartAmount() + getCartAmount() * 2 / 100}</span>
+                        <span>Total Amount:</span><span>{currency}{ getCartAmount() + getCartAmount() * 2 / 100}</span>
                     </p>
                 </div>
 
