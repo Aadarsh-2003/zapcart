@@ -12,3 +12,7 @@
 #primary:hover{
   background-color: #44ae7c;
 }
+
+.no-scrollbar::-webkit-scrollbar{
+  display: none;
+}
