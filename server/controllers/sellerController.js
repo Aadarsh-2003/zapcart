@@ -31,7 +31,13 @@ export const sellerLogin = async(req,res)=>{
 // Seller isAuth : /api/seller/is-auth  
 export const isSellerAuth = async (req,res)=>{
     try {
-        return res.json({success:true});
+        const token = req.cookies?.sellerToken;
+        if (!token) {
+            return res.status(401).json({ success: false, message: "Unauthorized" });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        return res.json({ success: true, email: decoded.email });
 
     } catch (error) {
         console.log(error.message);
