@@ -20,9 +20,19 @@ export const AppContextProvider = ({children})=>{
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState({});
     const [searchQuerry, setSearchQuerry] = useState({});
+    const [initialLoad, setInitialLoad] = useState(true);
 
     const fetchProducts = async()=>{
-        setProducts(dummyProducts);
+        try {
+            const {data} = await axios.get('api/product/list')
+            if(data.success){
+                setProducts(data.products)
+            }else{
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
     const fetchSeller = async ()=>{
@@ -35,6 +45,20 @@ export const AppContextProvider = ({children})=>{
             }
         } catch (error) {
             setIsSeller(false);
+        }
+    }
+
+    const fetchUser = async ()=>{
+        try {
+            const {data} = await axios.get('/api/user/is-auth');
+            if(data.success){
+                setUser(data.user)
+                setCartItems(data.user.cartItems)
+            }else{
+                setUser(null)
+            }
+        } catch (error) {
+            setUser(null)
         }
     }
 
@@ -100,11 +124,37 @@ export const AppContextProvider = ({children})=>{
     
     //fetcgh all products
     useEffect(() => {
+        fetchUser();
         fetchSeller();
         fetchProducts();
     }, []) 
 
-    const value = {navigate, user , setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, cartItems ,addToCart, updateCartItems, removeFromCart, searchQuerry, setSearchQuerry, getCartCount, getCartAmount, axios}
+    useEffect(() => {
+
+        const updateCart = async ()=>{
+            try {
+                const {data} = await axios.post('/api/cart/update' , {cartItems});
+                if(!data.success){
+                    toast.error(data.message)
+                }
+            } catch (error) {
+                toast.error(error.message)
+            }
+        }
+
+        if (initialLoad) {
+            setInitialLoad(false); // ⛔ prevent update on first run
+            return;
+        }
+
+        // Only update cart if cartItems is not empty and user is present
+        if (user && Object.keys(cartItems).length > 0) {
+            updateCart();
+        }
+        
+    }, [cartItems,user]);
+
+    const value = {navigate, user , setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, cartItems ,addToCart, updateCartItems, removeFromCart, searchQuerry, setSearchQuerry, getCartCount, getCartAmount, axios, fetchProducts}
 
     return <AppContext.Provider value={value}>
         {children}
