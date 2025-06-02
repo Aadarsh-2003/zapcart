@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { assets, dummyAddress } from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
+import toast from 'react-hot-toast';
 
 const Cart = () => {
-    const {products, currency, cartItems, removeFromCart, getCartCount, updateCartItems, navigate, getCartAmount} = useAppContext();
+    const {products, currency, cartItems, removeFromCart, getCartCount, updateCartItems, navigate, getCartAmount, user, axios, setCartItems} = useAppContext();
     const [showAddress, setShowAddress] = useState(false);
     const [cartArray, setCartArray] = useState([]);
-    const [addresses, setAddresses] = useState(dummyAddress);
-    const [selectedAddress, setSelectedAddress] = useState(dummyAddress[0]);
+    const [addresses, setAddresses] = useState([]);
+    const [selectedAddress, setSelectedAddress] = useState(null);
     const [paymentOption, setPaymentOption] = useState("COD");
 
     const getCart = ()=>{
@@ -20,8 +21,56 @@ const Cart = () => {
         setCartArray(tempArray)
     };
 
-    const placeOrder = async()=>{
+    const getUserAddress = async ()=>{
+        try {
+            const {data} = await axios.post('/api/address/get', {userId: user._id});
+            if(data.success){
+                setAddresses(data.addresses);
+                if(data.addresses.length > 0){
+                    setSelectedAddress(data.addresses[0]);
+                }
+            }else{
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
 
+    const placeOrder = async()=>{
+        try {
+            if(!selectedAddress){
+                return toast.error("Please select an address")
+            }
+            // Place order with COD
+            if(paymentOption === 'COD'){
+                const {data} = await axios.post('/api/order/cod', {
+                    userId: user._id,
+                    items: cartArray.map(item => ({product: item._id , quantity: item.quantity})),
+                    address: selectedAddress._id
+                })
+                if(data.success){
+                    toast.success(data.message);
+
+                    // to clear cart in context
+                    setCartItems({});
+                    // to clear cart in UI
+                    setCartArray([]);
+
+                    // to clear cart from backend
+                    await axios.post('/api/cart/update', {
+                        userId: user._id,
+                        cartItems: {}
+                    });
+
+                    navigate('/my-orders');
+                }else{
+                    toast.error(data.message);
+                }
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
 
@@ -30,6 +79,13 @@ const Cart = () => {
         getCart();
       }
     }, [products, cartItems])
+
+
+    useEffect(() => {
+        if(user){
+            getUserAddress();
+        }
+    }, [user])
     
 
     
