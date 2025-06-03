@@ -130,7 +130,7 @@ export const stripeWebHooks = async(req,res)=>{
     switch (event.type) {
         case "payment_intent.succeeded":{
             const paymentIntent = event.data.object;
-            const paymentIntentId = paymentIntent._id;
+            const paymentIntentId = paymentIntent.id;
 
             // getting session metadata
             const session = await stripeInstance.checkout.sessions.list({
@@ -138,7 +138,7 @@ export const stripeWebHooks = async(req,res)=>{
 
             });
 
-            const {sessionId , userId} = session.data[0].metadata;
+            const {orderId , userId} = session.data[0].metadata;
 
             //mark payment as paid
             await Order.findByIdAndUpdate(orderId , {isPaid: true})
@@ -172,6 +172,8 @@ export const stripeWebHooks = async(req,res)=>{
     res.json({received: true});
 
 }
+
+
 
 // get orders by UserId : /api/order/user
 export const getUserOrders = async (req,res)=>{
