@@ -13,6 +13,7 @@ export const sellerLogin = async(req,res)=>{
             httpOnly : true, // prevent javascript to access cookie
             secure: process.env.NODE_ENV === 'production', // use secure cookie in production
             sameSite: process.env.NODE_ENV === 'production'? 'none' : 'strict', //CSRF protection
+            path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000, //cookie expiration time , 7 days
         })
 
@@ -48,10 +49,14 @@ export const isSellerAuth = async (req,res)=>{
 // Seller Logout  : /api/seller/logout
 export const sellerLogout = async(req,res)=>{
     try {
+        res.setHeader('Cache-Control', 'no-store'); // prevent edge caching
+
         res.clearCookie('sellerToken',{
             httpOnly : true, // prevent javascript to access cookie
             secure: process.env.NODE_ENV === 'production', // use secure cookie in production
             sameSite: process.env.NODE_ENV === 'production'? 'none' : 'strict', //CSRF protection
+            path: '/',
+            expires: new Date(0),
         });
         return res.json({success:true , message:"Logged Out"});
     } catch (error) {

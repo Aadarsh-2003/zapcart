@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const addressSchema = new mongoose.Schema({
     userId:{
         type: String,
+        ref: 'User',
         required: true
     },
     firstName:{
