@@ -96,12 +96,14 @@ export const isAuth = async (req,res)=>{
 // Logout user : /api/user/logout
 export const logout = async(req,res)=>{
     try {
+        res.setHeader('Cache-Control', 'no-store'); // prevent edge caching
+
         res.clearCookie('token',{
             httpOnly : true, // prevent javascript to access cookie
             secure: process.env.NODE_ENV === 'production', // use secure cookie in production
             sameSite: process.env.NODE_ENV === 'production'? 'none' : 'strict', //CSRF protection
             path: '/',
-            
+            expires: new Date(0),
         });
         return res.json({success:true , message:"Logged Out"});
     } catch (error) {
