@@ -65,6 +65,7 @@ export const login = async (req,res)=>{
             httpOnly : true, // prevent javascript to access cookie
             secure: process.env.NODE_ENV === 'production', // use secure cookie in production
             sameSite: process.env.NODE_ENV === 'production'? 'none' : 'strict', //CSRF protection
+            path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000, //cookie expiration time , 7 days
         })
 
@@ -99,6 +100,8 @@ export const logout = async(req,res)=>{
             httpOnly : true, // prevent javascript to access cookie
             secure: process.env.NODE_ENV === 'production', // use secure cookie in production
             sameSite: process.env.NODE_ENV === 'production'? 'none' : 'strict', //CSRF protection
+            path: '/',
+            
         });
         return res.json({success:true , message:"Logged Out"});
     } catch (error) {
