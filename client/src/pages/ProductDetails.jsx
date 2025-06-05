@@ -77,17 +77,27 @@ const ProductDetails = () => {
                     </ul>
 
                     <div className="flex items-center mt-10 gap-4 text-base">
-                        <button  onClick={()=> addToCart(product._id)} className="w-full py-3.5 cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 transition" >
-                            Add to Cart
-                        </button>
-                        <button  onClick={()=> {
-                            addToCart(product._id);
-                            navigate('/cart');
-                            }} className="w-full py-3.5 cursor-pointer font-medium bg-emerald-500 text-white hover:bg-emerald-600 transition" >
-                            Buy now
-                        </button>
+                        {product.inStock ? (
+                        <>
+                            <button  onClick={()=> addToCart(product._id)} className="w-full py-3.5 cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 transition" >
+                                Add to Cart
+                            </button>
+                            <button  onClick={()=> {
+                                addToCart(product._id);
+                                navigate('/cart');
+                                }} className="w-full py-3.5 cursor-pointer font-medium bg-emerald-500 text-white hover:bg-emerald-600 transition" >
+                                Buy now
+                            </button>
+                        </>
+                        ) : (
+                            <button disabled className="w-full py-3.5 font-medium bg-gray-300 text-gray-500 cursor-not-allowed">
+                            Out of Stock
+                            </button>
+                        )}
                     </div>
                 </div>
+
+
             </div>
             {/* ------------------Related products--------------- */}
             <div className='flex flex-col items-center mt-20' >

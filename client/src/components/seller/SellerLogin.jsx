@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const SellerLogin = () => {
 
-    const {isSeller, setIsSeller, navigate, axios} = useAppContext();
+    const {isSeller, setIsSeller, navigate, axios, setShowUserLogin} = useAppContext();
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
 
@@ -48,6 +48,9 @@ const SellerLogin = () => {
                 <p>Password</p>
                 <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" placeholder='Enter your password' className='border border-gray-200 rounded w-full p-2 mt-1 outline-emerald-500' required />
             </div>
+            <p>
+                Are you a User? <span onClick={() => {navigate('/'), setShowUserLogin(true)} } className="text-emerald-500 cursor-pointer">click here</span>
+            </p>
             <button id='primary' className='text-white w-full py-2 rounded-md cursor-pointer' >Login</button>
         </div>
 

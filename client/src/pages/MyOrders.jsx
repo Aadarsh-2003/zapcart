@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../context/AppContext';
 import { dummyOrders } from '../assets/assets';
-import toast from 'react-hot-toast';
+import { useLocation } from "react-router-dom";
 
 const MyOrders = () => {
 
     const [myOrders, setMyOrders] = useState([]);
     const {currency, axios, user} = useAppContext();
+
+    
 
     const fetchMyOrders = async()=>{
         setMyOrders(dummyOrders);
@@ -20,11 +22,13 @@ const MyOrders = () => {
         }
     }
 
+    const location = useLocation();
+
     useEffect(() => {
-        if(user){
+        if(user?._id){
             fetchMyOrders();
         }
-    }, [user])
+    }, [user?._id, location.pathname])
     
 
   return (

@@ -19,9 +19,10 @@ const Login = () => {
             const {data} = await axios.post(`/api/user/${state}` , {name, email, password});
 
             if(data.success){
-                navigate('/')
+                // navigate('/')
                 setUser(data.user)
                 setShowUserLogin(false)
+                window.location.href = "/";
             }else{
                 toast.error(data.message);
             }
@@ -60,9 +61,14 @@ const Login = () => {
                 </p>
             ) : (
                 <p>
-                    Create an account? <span onClick={() => setState("register")} className="text-emerald-500 cursor-pointer">click here</span>
+                    Create an account? <span onClick={() => setState("register")} className="text-emerald-500 cursor-pointer">click here</span> <br/><br/>
+                    Are you a Seller? <span onClick={() => {
+                        navigate('/seller'),
+                        setShowUserLogin(false)
+                        } } className="text-emerald-500 cursor-pointer">click here</span>
                 </p>
             )}
+            
             <button className="bg-emerald-500 hover:bg-emerald-600 transition-all text-white w-full py-2 rounded-md cursor-pointer">
                 {state === "register" ? "Create Account" : "Login"}
             </button>

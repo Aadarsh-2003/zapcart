@@ -56,7 +56,6 @@ export const sellerLogout = async(req,res)=>{
             secure: process.env.NODE_ENV === 'production', // use secure cookie in production
             sameSite: process.env.NODE_ENV === 'production'? 'none' : 'strict', //CSRF protection
             path: '/',
-            expires: new Date(0),
         });
         return res.json({success:true , message:"Logged Out"});
     } catch (error) {
