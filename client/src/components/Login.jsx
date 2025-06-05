@@ -63,7 +63,7 @@ const Login = () => {
                 <p>
                     Create an account? <span onClick={() => setState("register")} className="text-emerald-500 cursor-pointer">click here</span> <br/><br/>
                     Are you a Seller? <span onClick={() => {
-                        navigate('/seller'),
+                        window.location.href ="/seller",
                         setShowUserLogin(false)
                         } } className="text-emerald-500 cursor-pointer">click here</span>
                 </p>

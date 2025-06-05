@@ -8,12 +8,18 @@ import Footer from '../components/Footer'
 
 const Home = () => {
   return (
-    <div className='mt-10'>
-        <MainBanner/>
-        <Categories/>
-        <BestSeller/>
-        <BottomBanner/>
-        <NewsLetter/>
+    <div id="home" className='mt-10'>
+        
+            <MainBanner/>
+            <Categories/>
+
+        <section id="best-sellers">
+            <BestSeller/>
+        </section>
+
+            <BottomBanner/>
+            <NewsLetter/>
+        
 
     </div>
   )
