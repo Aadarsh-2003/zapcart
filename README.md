@@ -19,25 +19,25 @@ ZapCart is a fully functional e-commerce platform built using the **MERN stack**
 ## 📸 Screenshots
 
 ### 🏠 Homepage
-<img src="client/src/assets/homepage.png" width="100%" />
+<img src="client/src/assets/homepage.png" width="50%" />
 
 ### 🛍️ All Products Page
-<img src="client/src/assets/allproductspage.png" width="100%" />
+<img src="client/src/assets/allproductspage.png" width="50%" />
 
 ### 🛒 Cart Page
-<img src="client/src/assets/cartpage.png" width="100%" />
+<img src="client/src/assets/cartpage.png" width="50%" />
 
 ### 📦 My Orders Page
-<img src="client/src/assets/my-orderspage.png" width="100%" />
+<img src="client/src/assets/my-orderspage.png" width="50%" />
 
 ### ➕ Seller – Add Product
-<img src="client/src/assets/seller-addproduct-page.png" width="100%" />
+<img src="client/src/assets/seller-addproduct-page.png" width="50%" />
 
 ### 📋 Seller – Product List
-<img src="client/src/assets/seller-productlist-page.png" width="100%" />
+<img src="client/src/assets/seller-productlist-page.png" width="50%" />
 
 ### 📦 Seller – Order List
-<img src="client/src/assets/seller-orderlist-page.png" width="100%" />
+<img src="client/src/assets/seller-orderlist-page.png" width="50%" />
 
 ---
 
