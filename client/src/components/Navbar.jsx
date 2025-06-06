@@ -100,7 +100,7 @@ const Navbar = () => {
             <img src={assets.profile_icon} alt="profile" className="w-10 cursor-pointer" onClick={() => setMenuOpen((prev) => !prev)} />
             {menuOpen && (
               <ul className="absolute top-12 right-0 bg-white shadow border border-gray-200 py-2.5 w-32 rounded-md text-sm z-50">
-                <li onClick={() => { setMenuOpen(false); navigate('my-orders'); }} className="p-1.5 pl-3 hover:bg-emerald-100 cursor-pointer">My Orders</li>
+                <li onClick={() => { setMenuOpen(false); navigate('/my-orders'); }} className="p-1.5 pl-3 hover:bg-emerald-100 cursor-pointer">My Orders</li>
                 <li onClick={() => { setMenuOpen(false); logout(); }} className="p-1.5 pl-3 hover:bg-emerald-100 cursor-pointer">Logout</li>
               </ul>
             )}
@@ -140,7 +140,7 @@ const Navbar = () => {
         <div className="absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm min-[768px]:hidden flex">
           <NavLink to='/' onClick={() => setMenuOpen(false)}>Home</NavLink>
           <NavLink to='/products' onClick={() => setMenuOpen(false)}>All Products</NavLink>
-          {user && <NavLink to='/products' onClick={() => setMenuOpen(false)}>My Orders</NavLink>}
+          {user && <NavLink to='/my-orders' onClick={() => setMenuOpen(false)}>My Orders</NavLink>}
           <NavLink to='/contact' onClick={() => setMenuOpen(false)}>Contact</NavLink>
           {!user ? (
             <button onClick={() => { setMenuOpen(false); setShowUserLogin(true); }} id="primary" className="cursor-pointer px-6 py-2 mt-2 transition text-white rounded-full text-sm">
