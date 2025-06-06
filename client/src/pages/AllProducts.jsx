@@ -30,7 +30,7 @@ const AllProducts = () => {
             <div className='w-16 h-0.5 bg-emerald-300 rounded-full' ></div>
         </div>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 md:px-0 mt-6'>
+        <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 md:px-0 mt-6'>
             {filteredProducts.map((product,index)=>(
                 <ProductCard key={index} product={product} />
             ))}
